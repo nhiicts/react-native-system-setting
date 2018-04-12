@@ -131,7 +131,12 @@ RCT_EXPORT_METHOD(isAirplaneEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RC
 
 -(void)openSetting:(NSString*)service{
     NSString *url = [setting objectForKey:service];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:[NSDictionary new] completionHandler:nil];
+    BOOL newSys = [UIDevice currentDevice].systemVersion.doubleValue >= 10.0;
+    if (newSys) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:[NSDictionary new] completionHandler:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWakeUp:)
                                                  name:UIApplicationWillEnterForegroundNotification
