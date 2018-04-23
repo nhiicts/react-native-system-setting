@@ -35,7 +35,7 @@
         cb = [[CBCentralManager alloc] initWithDelegate:nil queue:nil options:@{CBCentralManagerOptionShowPowerAlertKey: @NO}];
     }
 
-    [self initVolumeView];
+    //[self initVolumeView];
     [self initSetting];
 
     return self;
